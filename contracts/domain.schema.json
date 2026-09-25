@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "跨市场节日保供调拨账领域事件",
+  "type": "object",
+  "required": [
+    "event_id",
+    "event_type",
+    "aggregate_type",
+    "aggregate_id",
+    "occurred_at",
+    "version",
+    "payload"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "LOT_DECLARED",
+        "TRANSIT_UPDATED",
+        "INSPECTION_RECORDED",
+        "QUANTITY_RESERVED",
+        "TRANSFER_SETTLED"
+      ]
+    },
+    "aggregate_type": {
+      "type": "string",
+      "enum": [
+        "supply_lot",
+        "transit_leg",
+        "purchase_commitment",
+        "transfer_order"
+      ]
+    },
+    "aggregate_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "payload": {
+      "type": "object"
+    }
+  },
+  "payload_required_by_event": {
+    "TRANSIT_UPDATED": [
+      "location_ref",
+      "observed_at"
+    ],
+    "QUANTITY_RESERVED": [
+      "market_ref",
+      "quantity"
+    ],
+    "TRANSFER_SETTLED": [
+      "received_quantity",
+      "loss_reason"
+    ]
+  },
+  "additionalProperties": false
+}

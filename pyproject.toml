@@ -1,0 +1,5 @@
+[project]
+name = "festival-supply"
+version = "0.1.0"
+description = "跨市场节日保供调拨账领域契约"
+requires-python = ">=3.11"
