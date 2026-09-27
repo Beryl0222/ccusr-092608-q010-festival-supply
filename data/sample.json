@@ -2,8 +2,15 @@
   "event_id": "092601-010-sample-001",
   "event_type": "LOT_DECLARED",
   "aggregate_type": "supply_lot",
-  "aggregate_id": "festival_supply-001",
+  "aggregate_id": "lot-veg-bokchoy-001",
   "occurred_at": "2026-09-25T10:00:00+08:00",
   "version": 1,
-  "payload": {}
+  "payload": {
+    "category_spec": "蔬菜/上海青/一级",
+    "unit": "kg",
+    "quantity": 5000,
+    "origin_market": "M-NORTH",
+    "quality_grade": "A",
+    "fresh_until": "2026-09-28T10:00:00+08:00"
+  }
 }

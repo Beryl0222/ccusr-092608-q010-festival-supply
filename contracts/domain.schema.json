@@ -20,19 +20,29 @@
       "type": "string",
       "enum": [
         "LOT_DECLARED",
+        "GAP_DECLARED",
         "TRANSIT_UPDATED",
+        "WAYBILL_FROZEN",
         "INSPECTION_RECORDED",
         "QUANTITY_RESERVED",
-        "TRANSFER_SETTLED"
+        "TRANSFER_ORDERED",
+        "ARRIVAL_CONFIRMED",
+        "TRANSFER_SETTLED",
+        "EXEMPTION_REQUESTED",
+        "EXEMPTION_APPROVED",
+        "GUIDANCE_PRICE_ASSESSED"
       ]
     },
     "aggregate_type": {
       "type": "string",
       "enum": [
         "supply_lot",
+        "market_gap",
         "transit_leg",
         "purchase_commitment",
-        "transfer_order"
+        "transfer_order",
+        "price_exemption",
+        "price_assessment"
       ]
     },
     "aggregate_id": {
@@ -52,17 +62,69 @@
     }
   },
   "payload_required_by_event": {
+    "LOT_DECLARED": [
+      "category_spec",
+      "quantity",
+      "origin_market",
+      "quality_grade",
+      "fresh_until"
+    ],
+    "GAP_DECLARED": [
+      "market_ref",
+      "category_spec",
+      "quantity"
+    ],
     "TRANSIT_UPDATED": [
+      "waybill_no",
+      "status",
       "location_ref",
       "observed_at"
     ],
+    "WAYBILL_FROZEN": [
+      "waybill_no"
+    ],
+    "INSPECTION_RECORDED": [
+      "status"
+    ],
     "QUANTITY_RESERVED": [
+      "lot_id",
+      "actor_market",
       "market_ref",
-      "quantity"
+      "quantity",
+      "release_at"
+    ],
+    "TRANSFER_ORDERED": [
+      "lot_id",
+      "actor_market",
+      "from_market",
+      "to_market",
+      "quantity",
+      "quality_grade",
+      "responsible_market",
+      "emergency"
+    ],
+    "ARRIVAL_CONFIRMED": [
+      "receipt_no",
+      "waybill_no",
+      "receiver_market",
+      "confirmed_by",
+      "received_quantity"
     ],
     "TRANSFER_SETTLED": [
-      "received_quantity",
       "loss_reason"
+    ],
+    "EXEMPTION_REQUESTED": [
+      "market_ref",
+      "requester_id"
+    ],
+    "EXEMPTION_APPROVED": [
+      "approver_id"
+    ],
+    "GUIDANCE_PRICE_ASSESSED": [
+      "market_ref",
+      "category_spec",
+      "guidance_price",
+      "evidence_receipts"
     ]
   },
   "additionalProperties": false
