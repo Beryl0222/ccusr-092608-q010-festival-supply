@@ -23,7 +23,15 @@
         "TRANSIT_UPDATED",
         "INSPECTION_RECORDED",
         "QUANTITY_RESERVED",
-        "TRANSFER_SETTLED"
+        "EMERGENCY_TRANSFER_CREATED",
+        "TRANSFER_SETTLED",
+        "WAYBILL_FROZEN",
+        "WAYBILL_RECONCILED",
+        "LOT_RELEASED",
+        "PRICE_GUIDANCE_ISSUED",
+        "PRICE_EXEMPTION_REQUESTED",
+        "PRICE_EXEMPTION_APPROVED",
+        "STORE_GAP_REPORTED"
       ]
     },
     "aggregate_type": {
@@ -32,7 +40,10 @@
         "supply_lot",
         "transit_leg",
         "purchase_commitment",
-        "transfer_order"
+        "transfer_order",
+        "price_guidance",
+        "price_exemption",
+        "store_gap"
       ]
     },
     "aggregate_id": {
@@ -52,18 +63,126 @@
     }
   },
   "payload_required_by_event": {
+    "LOT_DECLARED": [
+      "actor_ref",
+      "category",
+      "spec",
+      "origin_market_ref",
+      "owner_ref",
+      "quantity",
+      "quality_grade",
+      "usable_until"
+    ],
     "TRANSIT_UPDATED": [
+      "actor_ref",
+      "transfer_id",
+      "waybill_no",
       "location_ref",
-      "observed_at"
+      "observed_at",
+      "quantity",
+      "to_market_ref"
+    ],
+    "INSPECTION_RECORDED": [
+      "actor_ref",
+      "lot_ref",
+      "status"
     ],
     "QUANTITY_RESERVED": [
+      "actor_ref",
+      "lot_ref",
       "market_ref",
       "quantity"
     ],
+    "EMERGENCY_TRANSFER_CREATED": [
+      "actor_ref",
+      "lot_ref",
+      "from_market_ref",
+      "to_market_ref",
+      "waybill_no",
+      "quantity",
+      "quality_grade",
+      "owner_ref",
+      "source_authorization",
+      "splits",
+      "sacrifices"
+    ],
     "TRANSFER_SETTLED": [
+      "actor_ref",
+      "receiver_ref",
+      "waybill_no",
+      "receipt_no",
       "received_quantity",
+      "received_quality_grade",
       "loss_reason"
+    ],
+    "WAYBILL_FROZEN": [
+      "actor_ref",
+      "waybill_no",
+      "reason"
+    ],
+    "WAYBILL_RECONCILED": [
+      "actor_ref",
+      "waybill_no",
+      "resolution"
+    ],
+    "LOT_RELEASED": [
+      "actor_ref",
+      "lot_ref",
+      "release_reason",
+      "quantity"
+    ],
+    "PRICE_GUIDANCE_ISSUED": [
+      "actor_ref",
+      "market_ref",
+      "category",
+      "spec",
+      "guidance_price",
+      "basis_receipt_ids"
+    ],
+    "PRICE_EXEMPTION_REQUESTED": [
+      "actor_ref",
+      "market_ref",
+      "category",
+      "spec",
+      "requester_ref",
+      "reason"
+    ],
+    "PRICE_EXEMPTION_APPROVED": [
+      "actor_ref",
+      "request_id",
+      "approver_ref"
+    ],
+    "STORE_GAP_REPORTED": [
+      "actor_ref",
+      "market_ref",
+      "store_ref",
+      "category",
+      "spec",
+      "quantity",
+      "observed_at"
     ]
+  },
+  "payload_enums_by_event": {
+    "INSPECTION_RECORDED": {
+      "status": [
+        "passed",
+        "detained",
+        "released",
+        "condemned"
+      ]
+    },
+    "WAYBILL_RECONCILED": {
+      "resolution": [
+        "confirmed",
+        "corrected"
+      ]
+    },
+    "LOT_RELEASED": {
+      "release_reason": [
+        "post_holiday",
+        "expiring"
+      ]
+    }
   },
   "additionalProperties": false
 }

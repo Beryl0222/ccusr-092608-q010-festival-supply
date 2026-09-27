@@ -2,8 +2,17 @@
   "event_id": "092601-010-sample-001",
   "event_type": "LOT_DECLARED",
   "aggregate_type": "supply_lot",
-  "aggregate_id": "festival_supply-001",
+  "aggregate_id": "lot-001",
   "occurred_at": "2026-09-25T10:00:00+08:00",
   "version": 1,
-  "payload": {}
+  "payload": {
+    "actor_ref": "dispatch-jiaxing-01",
+    "category": "蔬菜",
+    "spec": "大白菜 一等 15kg/筐",
+    "origin_market_ref": "market-jiaxing",
+    "owner_ref": "coop-jiaxing-veg-07",
+    "quantity": 1000,
+    "quality_grade": "A",
+    "usable_until": "2026-10-02T10:00:00+08:00"
+  }
 }

@@ -53,4 +53,8 @@ def validate_event(payload: Any, schema: Mapping[str, Any]) -> list[ContractIssu
         for field in schema.get("payload_required_by_event", {}).get(event_type, []):
             if field not in body:
                 issues.append(ContractIssue(f"payload.{field}", "required", "事件载荷缺少必填字段"))
+        for field, allowed in schema.get("payload_enums_by_event", {}).get(event_type, {}).items():
+            value = body.get(field)
+            if isinstance(value, str) and allowed and value not in allowed:
+                issues.append(ContractIssue(f"payload.{field}", "unsupported_value", "载荷字段值未在契约中登记"))
     return sorted(issues, key=lambda issue: (issue.field, issue.code))
